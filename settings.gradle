@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven { url = 'https://maven.parchmentmc.org' }
+    }
+}
+
+rootProject.name = 'parchmcp'
+
+include ':mcp'
+project(":mcp").projectDir = file("projects/mcp")
