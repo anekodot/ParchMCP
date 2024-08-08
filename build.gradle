@@ -1,3 +1,7 @@
+/*
+
+*/
+
 buildscript {
     repositories {
         mavenLocal()
@@ -7,7 +11,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.0.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5+'
         classpath "gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext:1.1.3"
         classpath "org.parchmentmc.librarian.forgegradle:org.parchmentmc.librarian.forgegradle.gradle.plugin:1.+"
     }
@@ -17,7 +21,7 @@ import net.minecraftforge.forge.tasks.*
 import org.jetbrains.gradle.ext.*
 
 apply plugin: 'eclipse'
-apply plugin: 'net.minecraftforge.gradle.forgedev.patcher'
+apply plugin: 'net.minecraftforge.gradle.patcher'
 apply plugin: "org.jetbrains.gradle.plugin.idea-ext"
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -25,7 +29,7 @@ println(' Java: ' + System.getProperty('java.version') +
         ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ')' +
         ' Arch: ' + System.getProperty('os.arch'))
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 configurations {
     shade
@@ -57,7 +61,7 @@ dependencies {
 }
 
 project(':mcp') {
-    apply plugin: 'net.minecraftforge.gradle.forgedev.mcp'
+    apply plugin: 'net.minecraftforge.gradle.mcp'
     mcp {
         config = minecraft_version + '-' + mcp_version
         pipeline = 'joined'
@@ -91,7 +95,7 @@ task runclient(type: JavaExec) {
     args '--gameDir', '.'
     args '--version', minecraft_version
     args '--assetsDir', downloadAssets.output
-    args '--assetIndex', "1.16"
+    args '--assetIndex', "1.18"
     args '--accessToken', '0'
     main 'net.minecraft.client.main.Main'
     workingDir 'run'
